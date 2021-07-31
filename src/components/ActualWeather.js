@@ -11,7 +11,7 @@ import DisplayTime from './DisplayTime';
 
 const ActualWeather = ({ weather }) => {
     const classes = Style();
-
+    const description = weather?.weather[0]?.description.charAt(0).toUpperCase() + weather?.weather[0]?.description.toLowerCase().slice(1)
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -51,35 +51,42 @@ const ActualWeather = ({ weather }) => {
                                     <Typography
                                         variant="h5"
                                     >
-                                        17°C
+                                        {Math.floor(weather?.main?.temp)}°C
                                     </Typography>
                                 </Grid>
                             </Grid>
                         </Grid>
                         <Grid item sm={6} >
                             <Grid container spacing={2} >
+                                <Grid item xs={12}>
+                                    <Typography>
+                                        Feels like {Math.floor(weather?.main?.temp)}°C.
+                                        {description}
+                                    </Typography>
+                                </Grid>
                                 <Grid item sm={6} >
-                                    <Typography variant="body2">
+                                    <Typography variant="subtitle2">
                                         <NavigationIcon
                                             fontSize="small"
                                             color="action"
                                             style={{
-                                                transform: `rotate(${180 + weather?.wind?.deg}deg)`,
+                                                transform: `rotate(${180 + weather?.wind?.deg}deg) `,
                                                 color: `${orange}`,
-
                                             }}
                                         />
                                         {weather?.wind?.speed} m/s
+                                        <br />
                                     </Typography>
-                                    <Typography variant="body2">
-                                        Humidity: {weather?.main?.humidity}
+                                    <Typography variant="subtitle2">
+                                        Humidity: {weather?.main?.humidity}%
                                     </Typography>
                                 </Grid>
                                 <Grid item sm={6} >
-                                    <Typography className={classes.detailRight} variant="body2">
+                                    <Typography className={classes.detailRight} variant="subtitle2">
                                         Pressure: {weather?.main?.pressure}hPa
+                                        <br />
                                     </Typography>
-                                    <Typography variant="body2">
+                                    <Typography variant="subtitle2">
                                         Visibility: {weather?.visibility}m
                                     </Typography>
                                 </Grid>
@@ -89,14 +96,6 @@ const ActualWeather = ({ weather }) => {
                 </Paper>
             </Grid>
 
-            <Grid item xs={12} sm={6} >
-                <Paper  >
-                    <Grid container direction="column" spacing={2} >
-                        <Grid item xs={12} sm={6}>asd</Grid>
-                        <Grid item xs={12} sm={6}>asd</Grid>
-                    </Grid>
-                </Paper>
-            </Grid>
         </Grid>
     )
 }

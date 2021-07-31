@@ -34,7 +34,7 @@ const Style = makeStyles({
 
     },
     detailRight: {
-        paddingTop: "5px"
+        paddingTop: "7px"
     }
 })
 
