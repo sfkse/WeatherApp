@@ -6,7 +6,7 @@ import SearchButton from '@material-ui/core/Button/Button';
 import Style from '../style/Style';
 
 
-const Search = () => {
+const Search = ({ search, handleSearch, handleSubmit }) => {
     const classes = Style()
 
     return (
@@ -20,11 +20,16 @@ const Search = () => {
                         label="Enter city name"
                         variant="outlined"
                         size="small"
+                        value={search}
+                        onChange={handleSearch}
+
                     />
                     <SearchButton
                         variant="contained"
                         color="primary"
-                        className={classes.searchIcon}>
+                        className={classes.searchIcon}
+                        onClick={handleSubmit}
+                    >
                         Search
                     </SearchButton>
                 </Paper>

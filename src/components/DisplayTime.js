@@ -15,7 +15,7 @@ const DisplayTime = ({ time }) => {
 
     return (
         <Typography className={classes.displayTime} variant="caption">
-            {`${month} ${day}, ${hour}:${minute}`}
+            {`${month} ${day}, ${hour}:${(minute < 10) ? "0" + minute : minute}`}
         </Typography>
     )
 }

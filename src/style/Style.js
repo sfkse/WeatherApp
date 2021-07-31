@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
-import orange from '@material-ui/core/colors/orange'
+import orange from '@material-ui/core/colors/orange';
 
 
-const Style = makeStyles((theme) => ({
+const Style = makeStyles({
 
     searchWrapper: {
         display: "flex",
@@ -11,14 +11,14 @@ const Style = makeStyles((theme) => ({
         margin: "auto",
         marginTop: 50,
         marginBottom: 50,
-        padding: theme.spacing(2),
+        padding: "1rem"
+
 
 
     },
     input: {
         color: "green",
-        width: "50%",
-
+        minWidth: 350
     },
     resultWrapper: {
         padding: 20
@@ -30,8 +30,12 @@ const Style = makeStyles((theme) => ({
 
     },
     displayTime: {
-        color: orange[700]
+        color: orange[900]
+
+    },
+    detailRight: {
+        paddingTop: "5px"
     }
-}))
+})
 
 export default Style
