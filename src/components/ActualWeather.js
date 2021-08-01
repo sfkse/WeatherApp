@@ -7,35 +7,24 @@ import orange from '@material-ui/core/colors/orange';
 import Style from '../style/Style';
 import { ImageList, ImageListItem } from '@material-ui/core';
 import DisplayTime from './DisplayTime';
+import ShowMap from './ShowMap';
 
 
-const ActualWeather = ({ weather }) => {
+const ActualWeather = ({ weather, coordinates }) => {
     const classes = Style();
     const description = weather?.weather[0]?.description.charAt(0).toUpperCase() + weather?.weather[0]?.description.toLowerCase().slice(1)
+    // console.log(coordinates)
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
                 <Paper className={classes.resultWrapper} >
-                    <Grid
-                        container
-                        direction="column"
-                        spacing={2}
-                    >
-                        <Grid
-                            item
-                            sm={6}
-                            xs={12}
-                        >
+                    <Grid container direction="column" spacing={2}>
+                        <Grid item sm={6} xs={12}>
                             <DisplayTime time={weather?.dt} />
                             <Typography variant="h3">
                                 {weather?.name}
                             </Typography>
-                            <Grid
-                                container
-                                alignItems="center"
-                                justifyContent="flex-start"
-                                spacing={2}
-                            >
+                            <Grid container alignItems="center" justifyContent="flex-start" spacing={2}>
                                 <Grid item sm={2}>
                                     <ImageList rowHeight={50}>
                                         <ImageListItem cols={2}  >
@@ -48,9 +37,7 @@ const ActualWeather = ({ weather }) => {
                                     </ImageList>
                                 </Grid>
                                 <Grid item sm={10}>
-                                    <Typography
-                                        variant="h5"
-                                    >
+                                    <Typography variant="h5">
                                         {Math.floor(weather?.main?.temp)}°C
                                     </Typography>
                                 </Grid>
@@ -59,9 +46,7 @@ const ActualWeather = ({ weather }) => {
                         <Grid item sm={6} >
                             <Grid container spacing={2} >
                                 <Grid item xs={12}>
-                                    <Typography>
-                                        Feels like {Math.floor(weather?.main?.temp)}°C.
-                                        {description}
+                                    <Typography> Feels like {Math.floor(weather?.main?.temp)}°C. {description}
                                     </Typography>
                                 </Grid>
                                 <Grid item sm={6} >
@@ -94,6 +79,10 @@ const ActualWeather = ({ weather }) => {
                         </Grid>
                     </Grid>
                 </Paper>
+            </Grid>
+            <Grid item sm={6}>
+                {coordinates ? <ShowMap style={{ heigh: "300px" }} coordinates={coordinates} /> : ""}
+
             </Grid>
 
         </Grid>
