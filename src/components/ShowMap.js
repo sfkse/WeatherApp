@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Popup, Marker, useMap } from 'react-leaflet';
 
 
 
-function SetViewOnClick({ weather, coordinates }) {
+function SetMapView({ weather, coordinates }) {
     const map = useMap();
     map.setView([coordinates?.lat, coordinates?.lon], 8);
     const description = weather?.weather[0]?.description.charAt(0).toUpperCase() + weather?.weather[0]?.description.toLowerCase().slice(1)
@@ -34,7 +34,7 @@ function ShowMap({ weather, coordinates }) {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <SetViewOnClick weather={weather} coordinates={coordinates} />
+            <SetMapView weather={weather} coordinates={coordinates} />
         </MapContainer>
     );
 }
