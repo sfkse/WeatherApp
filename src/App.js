@@ -26,7 +26,6 @@ function App() {
           .then(res => setWeather(res.data))
       });
     } else {
-      console.log("here")
       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=aacb738b95b7c8ff58e0059ebf01e7e7`)
         .then(res => setWeather(res.data))
     }
