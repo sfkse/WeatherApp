@@ -49,7 +49,7 @@ const ActualWeather = ({ weather, coordinates }) => {
                         <Grid item sm={6} >
                             <Grid container spacing={2} >
                                 <Grid item xs={12}>
-                                    <Typography> Feels like {Math.floor(weather?.main?.temp)}°C. {description}
+                                    <Typography> Feels like {Math.floor(weather?.main?.feels_like)}°C. {description}
                                     </Typography>
                                 </Grid>
                                 <Grid item sm={6} >
