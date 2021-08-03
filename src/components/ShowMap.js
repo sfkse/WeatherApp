@@ -27,7 +27,7 @@ function ShowMap({ weather, coordinates }) {
             classsName="map"
             center={[coordinates?.lat, coordinates?.lon]}
             zoom={8}
-            scrollWheelZoom={true}
+            scrollWheelZoom={false}
             style={{ height: "270px" }}
         >
             <TileLayer
