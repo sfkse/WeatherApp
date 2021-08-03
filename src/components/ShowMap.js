@@ -1,42 +1,42 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Popup, Marker, useMap } from 'react-leaflet';
 
-const ShowMap = ({ coordinates }) => {
-    // const [geoData, setGeoData] = useState({ lat: coordinates?.coord?.lat, lng: coordinates?.coord?.lon });
 
-    // setGeoData({
-    //     lat: coordinates?.coord?.lat,
-    //     lng: coordinates?.coord?.lon
-    // })
-    // useEffect(() => {
 
-    // }, [coordinates])
 
-    // const map = useMapEvents({
-    //     click: () => {
-    //         map.locate()
-    //     },
-    //     locationfound: (location) => {
-    //         console.log('location found:', location)
-    //     },
-    // })
-
+function SetViewOnClick({ weather, coordinates }) {
+    const map = useMap();
+    map.setView([coordinates?.lat, coordinates?.lon], 8);
+    const description = weather?.weather[0]?.description.charAt(0).toUpperCase() + weather?.weather[0]?.description.toLowerCase().slice(1)
     return (
+        <Marker position={[coordinates?.lat, coordinates?.lon]}>
+            <Popup>
+                <img
+                    src={`http://openweathermap.org/img/wn/${weather?.weather[0]?.icon}.png`}
+                    alt="WeatherIcon"
+                    style={{ width: "18px" }}
+                /> {Math.floor(weather?.main?.temp)}°C<br /> {description}
+            </Popup>
+        </Marker>
+    );
+}
 
-        <MapContainer center={[coordinates?.coord?.lat, coordinates?.coord?.lon]} zoom={8} scrollWheelZoom={true} style={{ height: "270px" }}>
+function ShowMap({ weather, coordinates }) {
+    return (
+        <MapContainer
+            classsName="map"
+            center={[coordinates?.lat, coordinates?.lon]}
+            zoom={8}
+            scrollWheelZoom={true}
+            style={{ height: "270px" }}
+        >
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[coordinates?.coord?.lat, coordinates?.coord?.lon]}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
+            <SetViewOnClick weather={weather} coordinates={coordinates} />
         </MapContainer>
-
-    )
+    );
 }
 
-export default ShowMap
+export default ShowMap;

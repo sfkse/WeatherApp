@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography/Typography';
@@ -13,7 +14,9 @@ import ShowMap from './ShowMap';
 const ActualWeather = ({ weather, coordinates }) => {
     const classes = Style();
     const description = weather?.weather[0]?.description.charAt(0).toUpperCase() + weather?.weather[0]?.description.toLowerCase().slice(1)
-    // console.log(coordinates)
+    useEffect(() => {
+        return null
+    }, [coordinates])
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -81,7 +84,7 @@ const ActualWeather = ({ weather, coordinates }) => {
                 </Paper>
             </Grid>
             <Grid item sm={6}>
-                {coordinates ? <ShowMap style={{ heigh: "300px" }} coordinates={coordinates} /> : ""}
+                {coordinates ? <ShowMap style={{ heigh: "300px" }} weather={weather} coordinates={coordinates} /> : ""}
 
             </Grid>
 

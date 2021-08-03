@@ -8,34 +8,35 @@ import ActualWeather from './components/ActualWeather';
 
 function App() {
   const [weather, setWeather] = useState();
-  const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
 
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value)
-  }
-  const handleSubmit = () => {
-    setQuery(search.toLowerCase())
+  const handleSubmit = (location) => {
+    setQuery(location)
 
-    console.log("before")
-    setSearch("")
   }
+  // console.log("create comps")
+
 
   useEffect(() => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=aacb738b95b7c8ff58e0059ebf01e7e7`)
       .then(res => setWeather(res.data))
+      .catch(err => {
+        alert("Entry is not valid");
+      });
     // console.log("effect")
 
   }, [query])
+
+  // console.log(weather)
   return (
     <div className="App">
       <Container>
         <Typography variant="h2" style={{ textAlign: "center", marginTop: "2rem" }}>Weather App </Typography>
-        <Search search={search} handleSearch={handleSearch} handleSubmit={handleSubmit} />
+        <Search handleSubmit={handleSubmit} />
         {
-          (query.length > 0) ?
-            <ActualWeather weather={weather} coordinates={weather} /> :
+          (query !== "") ?
+            <ActualWeather weather={weather} coordinates={weather?.coord} /> :
             <p style={{ textAlign: "center" }}>
               Please enter the city name to get weather information
             </p>
