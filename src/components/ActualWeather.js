@@ -83,8 +83,8 @@ const ActualWeather = ({ weather, coordinates }) => {
                     </Grid>
                 </Paper>
             </Grid>
-            <Grid item sm={6}>
-                {coordinates ? <ShowMap style={{ heigh: "300px" }} weather={weather} coordinates={coordinates} /> : ""}
+            <Grid item xs={12} sm={6}>
+                {coordinates ? <ShowMap weather={weather} coordinates={coordinates} /> : ""}
 
             </Grid>
 
